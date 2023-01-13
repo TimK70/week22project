@@ -58,7 +58,7 @@ resource "aws_subnet" "two_tier_private_subnet" {
 
 resource "aws_internet_gateway" "two_tier_igw" {
   vpc_id = aws_vpc.two_tier_vpc.id
-  
+
   tags = {
     Name = "two_tier_igw"
   }
@@ -70,7 +70,7 @@ resource "aws_nat_gateway" "two_tier_natgateway" {
 }
 
 resource "aws_eip" "two_tier_eip" {
-  
+
 }
 resource "aws_route_table" "two_tier_public_rt" {
   vpc_id = aws_vpc.two_tier_vpc.id
@@ -94,10 +94,10 @@ resource "aws_default_route_table" "two_tier_private_rt" {
 }
 
 resource "aws_route" "default_private_route" {
-  route_table_id = aws_route_table.default_private_rt.id
+  route_table_id         = aws_route_table.default_private_rt.id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.two_tier_natgateway.id
-  
+  nat_gateway_id         = aws_nat_gateway.two_tier_natgateway.id
+
   tags = {
     Name = "two_tier_private_route"
   }
@@ -105,13 +105,13 @@ resource "aws_route" "default_private_route" {
 
 
 resource "aws_security_group" "two_tier_public_sg" {
-  name = "two_tier_bastion_sg"
-  vpc_id      = aws_vpc.two_tier_vpc.id
-  
+  name   = "two_tier_bastion_sg"
+  vpc_id = aws_vpc.two_tier_vpc.id
+
   ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = [var.access_ip]
   }
 
@@ -124,20 +124,20 @@ resource "aws_security_group" "two_tier_public_sg" {
 }
 
 resource "aws_security_group" "two_tier_private_sg" {
-  name = "database_two_tier_sg"
+  name        = "database_two_tier_sg"
   description = "Allows inbound SSH traffic from Bastion"
-  vpc_id = aws_vpc.two_tier_vpc.id
-  
+  vpc_id      = aws_vpc.two_tier_vpc.id
+
   ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
     security_groups = [aws_security_group.two_tier_public_sg.id]
   }
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
@@ -146,17 +146,17 @@ resource "aws_security_group" "two_tier_private_sg" {
     protocol  = "tcp"
   }
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 resource "aws_security_group" "two_tier_web_sg" {
-  name = "two_tier_web_sg"
+  name        = "two_tier_web_sg"
   description = "Allows inbound HTTP traffic"
-  vpc_id = aws_vpc.two_tier_vpc.id
+  vpc_id      = aws_vpc.two_tier_vpc.id
 }
 
 resource "aws_db_subnet_group" "two_tier_rds_subnetgroup" {
