@@ -19,10 +19,10 @@ module "compute" {
 }
 
 module "week22_bastion" {
-  source = "./bastion"
-  public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
+  source           = "./bastion"
+  public_cidrs     = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   ami_id           = var.ami_id
-  public_sn_count = var.public_sn_count
+  public_sn_count  = var.public_sn_count
   private_sn_count = var.private_sn_count
   key_name         = var.key_name
   public_subnet_id = var.public_subnet_id
