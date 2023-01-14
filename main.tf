@@ -29,6 +29,8 @@ module "networking" {
   vpc_cidr       = "10.0.0.0/16"
   access_ip      = var.access_ip
   security_groups = module.networking.two_tier_public_sg
+  db_subnet_group   = var.db_subnet_group_name
+  two_tier_natgateway    = var.two_tier_natgateway
   # public_sg      = module.networking.public_sg
   # private_sg     = module.networking.private_sg
   # public_subnet  = module.networking.public_subnet
