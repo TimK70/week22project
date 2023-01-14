@@ -47,6 +47,7 @@ module "networking" {
   count           = var.private_sn_count
   public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs  = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
+  
   public_sn_count = var.public_sn_count
   two_tier_natgateway = var.two_tier_natgateway
   private_sn_count = var.private_sn_count
