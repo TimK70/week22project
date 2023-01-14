@@ -43,12 +43,13 @@ module "networking" {
   vpc_cidr       = "10.0.0.0/16"
   access_ip      = var.access_ip
   security_groups = module.networking.two_tier_public_sg
-  db_subnet_group   = var.db_subnet_group_name
-  nat_gateway_id = aws_nat_gateway.two_tier_natgateway
-  public_sg      = module.networking.public_sg
-  private_sg     = module.networking.private_sg
-  public_subnet  = module.networking.public_subnet
-  private_subnet = module.networking.private_subnet
+  db_subnet_group = var.db_subnet_group_name
+  count           = var.private_sn_count
+  #nat_gateway_id = aws_nat_gateway.two_tier_natgateway
+  #public_sg      = module.networking.public_sg
+  #private_sg     = module.networking.private_sg
+  #public_subnet  = module.networking.public_subnet
+  #private_subnet = module.networking.private_subnet
   public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs  = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
 
