@@ -4,21 +4,17 @@ variable "vpc_cidr" {
   type = string
 }
 
-# variable "public_cidrs" {
-#   type = list(any)
-# }
+variable "public_cidrs" {
+  type = list(any)
+}
 
-# variable "private_cidrs" {
-#   type = list(any)
-# }
+variable "private_cidrs" {
+  type = list(any)
+}
 
-# variable "public_sn_count" {
-#   type = number
-# }
+variable "public_sn_count" {}
 
-# variable "private_sn_count" {
-#   type = number
-# }
+variable "private_sn_count" {}
 variable "max_subnets" {
   type = number
 }
@@ -33,10 +29,7 @@ variable "db_subnet_group" {
   type = bool
 }
 
-variable "two_tier_natgateway" {
-  type = string
-}
+variable "two_tier_natgateway" {}
 
 
 
-# nat_gateway_id = aws_nat_gateway.two_tier_natgateway
