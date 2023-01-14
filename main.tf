@@ -40,7 +40,14 @@ module "networking" {
 
 
 
-resource "aws_route_table" "two_tier_private_rt" {}
+resource "aws_route_table" "two_tier_private_rt" {
+  
+}
 
-resource "aws_nat_gateway" "two_tier_natgateway" {}
-resource "aws_security_group" "two_tier_sg" {}
+resource "aws_nat_gateway" "two_tier_natgateway" {
+  
+}
+
+resource "aws_security_group" "two_tier_sg" {
+  
+}

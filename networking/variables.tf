@@ -19,7 +19,6 @@ variable "vpc_cidr" {
 # variable "private_sn_count" {
 #   type = number
 # }
-
 variable "max_subnets" {
   type = number
 }
