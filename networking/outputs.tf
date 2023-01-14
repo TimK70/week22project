@@ -9,11 +9,11 @@ output "db_subnet_group_name" {
 }
 
 output "db_security_group" {
-  value = [aws_security_group.two_tier_sg["mysql"].id]
+  value = [aws_security_group.two_tier_private_sg["mysql"].id]
 }
 
 output "public_sg" {
-  value = aws_security_group.two_tier_sg["public"].id
+  value = aws_security_group.two_tier_public_sg["public"].id
 }
 
 output "public_subnets" {
