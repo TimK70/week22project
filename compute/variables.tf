@@ -7,7 +7,7 @@ variable "public_subnets" {}
 variable "key_name" {}
 variable "user_data_path" {}
 variable "dbuser" {}
-variable "dbname" {}
+variable "db_name" {}
 variable "dbpassword" {}
 variable "db_endpoint" {}
 variable "public_subnet_id" {}

@@ -15,7 +15,7 @@ module "compute" {
   db_endpoint      = module.database.db_endpoint
   dbuser           = var.dbuser
   dbpassword       = var.dbpassword
-  dbname           = var.dbname
+  db_name           = var.db_name
 }
 
 module "week22_bastion" {
@@ -26,7 +26,7 @@ module "week22_bastion" {
   private_sn_count = var.private_sn_count
   key_name         = var.key_name
   public_subnet_id = var.public_subnet_id
-  dbname           = var.dbname
+  db_name           = var.db_name
   dbuser           = var.dbuser
   dbpassword       = var.dbpassword
 }
