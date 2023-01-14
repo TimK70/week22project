@@ -4,6 +4,7 @@ module "compute" {
   source           = "./compute"
   public_sg        = module.networking.public_sg
   public_subnets   = module.networking.public_subnets
+  public_subnet_id = var.public_subnet_id
   ami_id           = module.compute.ami_id
   instance_count   = 2
   instance_type    = "t2.micro"
