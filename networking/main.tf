@@ -12,6 +12,7 @@ resource "random_shuffle" "az_list" {
   input        = data.aws_availability_zones.available.names
   result_count = var.max_subnets
 }
+
 resource "aws_vpc" "two_tier_vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -56,6 +57,12 @@ resource "aws_subnet" "two_tier_private_subnet" {
   }
 }
 
+resource "aws_route_table_association" "two_tier_private_assoc" {
+  count = length(var.private_cidrs)
+  subnet_id = aws_subnet.two_tier_private_subnet.*.id[count.index]
+  route_table_id = aws_route_table.two_tier_private_rt.id
+}
+
 resource "aws_internet_gateway" "two_tier_igw" {
   vpc_id = aws_vpc.two_tier_vpc.id
 
@@ -72,6 +79,7 @@ resource "aws_nat_gateway" "two_tier_natgateway" {
 resource "aws_eip" "two_tier_eip" {
 
 }
+
 resource "aws_route_table" "two_tier_public_rt" {
   vpc_id = aws_vpc.two_tier_vpc.id
 
@@ -85,6 +93,7 @@ resource "aws_route" "default_route_public" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.two_tier_igw.id
 }
+
 resource "aws_default_route_table" "two_tier_private_rt" {
   default_route_table_id = aws_vpc.two_tier_vpc.default_route_table_id
 
@@ -102,7 +111,6 @@ resource "aws_route" "default_private_route" {
     Name = "two_tier_private_route"
   }
 }
-
 
 resource "aws_security_group" "two_tier_public_sg" {
   name   = "two_tier_bastion_sg"
@@ -168,4 +176,3 @@ resource "aws_db_subnet_group" "two_tier_rds_subnetgroup" {
   }
 }
 
-# resource aws_route_table
