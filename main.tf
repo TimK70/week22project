@@ -45,11 +45,7 @@ module "networking" {
   security_groups = module.networking.two_tier_public_sg
   db_subnet_group = var.db_subnet_group_name
   count           = var.private_sn_count
-  #nat_gateway_id = aws_nat_gateway.two_tier_natgateway
-  #public_sg      = module.networking.public_sg
-  #private_sg     = module.networking.private_sg
-  #public_subnet  = module.networking.public_subnet
-  #private_subnet = module.networking.private_subnet
+  count           = var.public_sn_count
   public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs  = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
 
@@ -61,10 +57,3 @@ resource "aws_route_table" "two_tier_private_rt" {
   vpc_id = var.two_tier_vpc.id
 }
 
-# resource "aws_nat_gateway" "two_tier_natgateway" {
-#   subnet_id = 
-# }
-
-# resource "aws_security_group" "two_tier_sg" {
-  
-# }

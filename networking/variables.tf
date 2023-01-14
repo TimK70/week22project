@@ -19,6 +19,7 @@ variable "public_sn_count" {
 variable "private_sn_count" {
   type = number
 }
+
 variable "max_subnets" {
   type = number
 }
@@ -33,7 +34,9 @@ variable "db_subnet_group" {
   type = bool
 }
 
-variable "two_tier_natgateway" {}
+variable "two_tier_natgateway" {
+  type = string
+}
 
 
 
