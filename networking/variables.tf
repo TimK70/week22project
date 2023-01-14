@@ -34,9 +34,9 @@ variable "db_subnet_group" {
   type = bool
 }
 
-# variable "two_tier_natgateway" {
-#   type = string
-# }
+variable "two_tier_natgateway" {
+  type = string
+}
 
 
 
