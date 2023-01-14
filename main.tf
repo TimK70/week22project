@@ -4,7 +4,6 @@ module "compute" {
   source           = "./compute"
   public_sg        = module.networking.public_sg
   public_subnets   = module.networking.public_subnets
-  public_subnet_id = module.compute.public_subnet_id
   ami_id           = module.compute.ami_id
   instance_count   = 2
   instance_type    = "t2.micro"
@@ -43,7 +42,9 @@ module "networking" {
   private_sn_count = var.private_sn_count
 }
 
-
+# module "database" {
+#   source = "./database"
+# }
 
 resource "aws_route_table" "two_tier_private_rt" {
   vpc_id = var.two_tier_vpc.id
