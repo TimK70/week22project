@@ -25,14 +25,16 @@ module "week22_bastion" {
 
 module "networking" {
   source         = "./networking"
-  public_sg      = module.networking.public_sg
-  private_sg     = module.networking.private_sg
-  public_subnet  = module.networking.public_subnet
-  private_subnet = module.networking.private_subnet
+  max_subnets    = 5
   vpc_cidr       = "10.0.0.0/16"
   access_ip      = var.access_ip
-  public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
-  private_cidrs  = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
+  security_groups = module.networking.two_tier_public_sg
+  # public_sg      = module.networking.public_sg
+  # private_sg     = module.networking.private_sg
+  # public_subnet  = module.networking.public_subnet
+  # private_subnet = module.networking.private_subnet
+  # public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
+  # private_cidrs  = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
 
 }
 
