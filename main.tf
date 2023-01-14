@@ -22,7 +22,9 @@ module "week22_bastion" {
   source = "./bastion"
   public_cidrs   = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   public_sn_count = var.public_sn_count
-  private_sn_count = var.private_sn_count 
+  private_sn_count = var.private_sn_count
+  dbuser           = var.dbuser
+  dbpassword       = var.dbpassword
 }
 
 
