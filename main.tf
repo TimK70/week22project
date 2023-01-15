@@ -12,7 +12,7 @@ module "compute" {
   key_name         = "two_tierkey"
   public_key_path  = "/home/ec2-user/.ssh/two_tierkey.pub"
   user_data_path   = "${path.root}/userdata.tpl"
-  # db_endpoint      = module.database.db_endpoint
+  db_endpoint      = module.database.db_endpoint
   dbuser           = var.dbuser
   dbpassword       = var.dbpassword
   db_name           = var.db_name
