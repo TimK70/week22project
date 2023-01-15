@@ -1,11 +1,11 @@
 #-----terraform.tfvars---
 
-variable "public_sn_count" {}
-variable "private_sn_count" {}
-variable "public_cidrs" {}
-variable "dbuser" {}
-variable "dbpassword" {}
-variable "db_name" {}
-variable "ami_id" {}
-variable "public_subnet_id" {}
-variable "key_name" {}
+public_sn_count = 2
+private_sn_count = 4
+public_cidrs = "10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"
+#dbuser" {}
+#dbpassword" {}
+#db_name" {}
+#ami_id = "
+#public_subnet_id = 
+key_name = two_tierkey
