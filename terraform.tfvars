@@ -7,6 +7,5 @@ public_cidrs = ["10.0.2.0/24, 10.0.4.0/24, 10.0.6.0/24"]
 #dbpassword
 db_name = var.dbuser
 #ami_id = "
--var "public_subnet_id = two_tier_public_subnet"
+public_subnet_id = -var "two_tier_public_subnet"
 
--var ""
