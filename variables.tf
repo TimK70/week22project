@@ -2,7 +2,9 @@
 variable "public_sn_count" {}
 variable "private_sn_count" {}
 variable "public_cidrs" {}
-variable "dbuser" {}
+variable "dbuser" {
+    value = string
+}
 variable "dbpassword" {}
 variable "dbname" {}
 variable "ami_id" {}
