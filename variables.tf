@@ -7,4 +7,4 @@ variable "dbpassword" {}
 variable "dbname" {}
 variable "ami_id" {}
 variable "public_subnet_id" {}
-# variable "key_name" {}
+variable "key_name" {}
