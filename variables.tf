@@ -1,10 +1,24 @@
 #---root/variables.tf
+
+variable "aws_region" {
+  default = "us-west-2"
+}
+
+variable "access_ip" {}
+
+#-------database variables
+
+variable "dbname" {
+  type = string
+}
+variable "dbuser" {
+  type = string
+}
+variable "dbpassword" {
+  type      = string
+  sensitive = true
+}
 variable "public_sn_count" {}
- variable "private_sn_count" {}
- variable "public_cidrs" {}
-# variable "dbuser" {}
-# variable "dbpassword" {}
-# variable "dbname" {}
-# variable "ami_id" {}
-# variable "public_subnet_id" {}
-# variable "key_name" {}
+variable "private_sn_count" {}
+variable "db_subnet_group" {}
+variable "two_tier_natgateway" {}

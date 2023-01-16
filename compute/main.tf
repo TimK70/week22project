@@ -40,7 +40,7 @@ resource "aws_instance" "two_tier_node" {
       db_endpoint = var.db_endpoint
       dbuser      = var.dbuser
       dbpass      = var.dbpassword
-      db_name      = var.db_name
+      db_name     = var.db_name
     }
   )
   root_block_device {
@@ -48,4 +48,28 @@ resource "aws_instance" "two_tier_node" {
   }
 }
 
+# provisioner "remote-exec" {
+#     connection {
+#       type        = "ssh"
+#       user        = "ubuntu"
+#       host        = self.public_ip
+#       private_key = file(var.private_key_path)
+#     }
+#     script = "${path.root}/delay.sh"
+#   }
+#   provisioner "local-exec" {
+#     command = templatefile("${path.cwd}/scp_script.tpl",
+#       {
+#         nodeip           = self.public_ip
+#         k3s_path         = "${path.cwd}/../"
+#         nodename         = self.tags.Name
+#         private_key_path = var.private_key_path
+#       }
+#     )
+#   }
+#   provisioner "local-exec" {
+#     when    = destroy
+#     command = "rm -f ${path.cwd}/../k3s-mtc_node-*"
+#   }
+# }
 

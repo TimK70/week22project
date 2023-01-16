@@ -1,6 +1,5 @@
 # --- networking/main.tf----
 
-
 data "aws_availability_zones" "available" {}
 
 resource "random_integer" "random" {
@@ -24,7 +23,6 @@ resource "aws_vpc" "two_tier_vpc" {
   lifecycle {
     create_before_destroy = true
   }
-
 }
 
 resource "aws_subnet" "two_tier_public_subnet" {
@@ -58,8 +56,8 @@ resource "aws_subnet" "two_tier_private_subnet" {
 }
 
 resource "aws_route_table_association" "two_tier_private_assoc" {
-  count = length(var.private_cidrs)
-  subnet_id = aws_subnet.two_tier_private_subnet.*.id[count.index]
+  count          = length(var.private_cidrs)
+  subnet_id      = aws_subnet.two_tier_private_subnet.*.id[count.index]
   route_table_id = aws_route_table.two_tier_private_rt.id
 }
 

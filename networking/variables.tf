@@ -1,42 +1,21 @@
 #---networking/variables.tf---
 
 variable "vpc_cidr" {
-  type = string
+    type = string
 }
-
 variable "public_cidrs" {
-  type = list(any)
+    type = list
 }
-
 variable "private_cidrs" {
-  type = list(any)
+    type = list
 }
-
-variable "public_sn_count" {
-  type = number
-}
-
-variable "private_sn_count" {
-  type = number
-}
-
-variable "max_subnets" {
-  type = number
-}
-
-variable "access_ip" {
-  type = string
-}
-
+variable "public_sn_count" {}
+variable "private_sn_count" {}
+variable "max_subnets" {}
+variable "access_ip" {}
 variable "security_groups" {}
-
-variable "db_subnet_group" {
-  type = bool
-}
-
-variable "two_tier_natgateway" {
-  type = string
-}
+variable "db_subnet_group" {}
+variable "two_tier_natgateway" {}
 
 
 
