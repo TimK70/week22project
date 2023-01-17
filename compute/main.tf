@@ -40,7 +40,7 @@ resource "aws_instance" "two_tier_node" {
       db_endpoint = var.db_endpoint
       dbuser      = var.dbuser
       dbpass      = var.dbpassword
-      db_name     = var.db_name
+      db_name     = var.dbname
     }
   )
   root_block_device {
