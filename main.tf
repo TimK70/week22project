@@ -2,7 +2,7 @@
 
 module "compute" {
   source          = "./compute"
-  ami_id          = "ami-0cf1dfc38e4c28f7d"
+  ami_id          = "ami-0c3cc3eb0dbb3a47d"
   public_sg       = module.networking.two_tier_public_sg
   public_subnets  = module.networking.public_subnets
   instance_count  = 2
@@ -20,23 +20,7 @@ module "compute" {
   # private_key_path = "/home/ec2-user/.ssh/two_tierkey"
 }
 
-# module "compute" {
-#   source           = "./compute"
-#   public_sg        = module.networking.public_sg
-#   public_subnets   = module.networking.public_subnets
-#   public_subnet_id = var.public_subnet_id
-#   ami_id           = module.compute.ami_id
-#   instance_count   = 2
-#   instance_type    = "t2.micro"
-#   vol_size         = 10
-#   key_name         = "two_tierkey"
-#   public_key_path  = "/home/ec2-user/.ssh/two_tierkey.pub"
-#   user_data_path   = "${path.root}/userdata.tpl"
-#   db_endpoint      = module.database.db_endpoint
-#   dbuser           = var.dbuser
-#   dbpassword       = var.dbpassword
-#   db_name          = var.dbname
-#}
+
 
 module "bastion" {
   source = "./bastion"
@@ -60,7 +44,6 @@ module "networking" {
   security_groups      = module.networking.two_tier_public_sg
   db_subnet_group      = var.db_subnet_group
   db_subnet_group_name = "two_tier_rds_sng"
-  # count               = var.private_sn_count
   public_cidrs        = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs       = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
   public_sn_count     = var.public_sn_count
@@ -69,14 +52,14 @@ module "networking" {
 }
 
 module "database" {
-  source                 = "./database"
-  dbname                 = var.dbname
-  dbuser                 = var.dbuser
-  dbpassword             = var.dbpassword
-  db_instance_class      = "db.t2.micro"
-  skip_db_snapshot       = true
-  db_engine_version      = "5.7"
-#  identifier          = "rds mysql"
+  source            = "./database"
+  dbname            = var.dbname
+  dbuser            = var.dbuser
+  dbpassword        = var.dbpassword
+  db_instance_class = "db.t2.micro"
+  skip_db_snapshot  = true
+  db_engine_version = "5.7"
+  #  identifier          = "rds mysql"
   db_identifier          = var.db_identifier
   db_subnet_group_name   = module.networking.db_subnet_group_name
   vpc_security_group_ids = [module.networking.db_security_group]
