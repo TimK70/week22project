@@ -2,7 +2,7 @@
 
 module "compute" {
   source          = "./compute"
-  ami_id          = "ami-0c3cc3eb0dbb3a47d"
+  ami_id          = "ami-0ceecbb0f30a902a6"
   public_sg       = module.networking.two_tier_public_sg
   public_subnets  = module.networking.public_subnets
   instance_count  = 2
@@ -44,6 +44,10 @@ module "networking" {
   security_groups      = module.networking.two_tier_public_sg
   db_subnet_group      = var.db_subnet_group
   db_subnet_group_name = "two_tier_rds_sng"
+<<<<<<< HEAD
+=======
+  # count               = var.private_sn_count
+>>>>>>> 8cfc779 (updated project files)
   public_cidrs        = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs       = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
   public_sn_count     = var.public_sn_count

@@ -18,3 +18,4 @@ variable "access_ip" {
 variable "db_identifier" {
   default = "two-tier-db"
 }
+
