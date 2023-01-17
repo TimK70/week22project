@@ -75,7 +75,7 @@ module "database" {
   dbpassword             = var.dbpassword
   db_instance_class      = "db.t2.micro"
   skip_db_snapshot       = true
-  db_engine_version      = "5.7.22"
+  db_engine_version      = "5.7"
 #  identifier          = "rds mysql"
   db_identifier          = var.db_identifier
   db_subnet_group_name   = module.networking.db_subnet_group_name

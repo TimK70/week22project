@@ -18,7 +18,7 @@ resource "aws_instance" "bastion" {
 # }
 
 resource "aws_vpc" "two_tier_vpc" {
-
+  cidr_block = "10.0.0.0/16"
 }
 
 resource "aws_security_group" "bastion_sg" {
