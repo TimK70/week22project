@@ -20,5 +20,10 @@ variable "dbpassword" {
 }
 variable "public_sn_count" {}
 variable "private_sn_count" {}
-variable "db_subnet_group" {}
-variable "two_tier_natgateway" {}
+variable "db_subnet_group" {
+  default = "two-tier-sng"
+}
+variable "two_tier_natgateway" {
+  default = "two-tier-ngw"
+}
+variable "db_identifier" {}

@@ -40,7 +40,7 @@ module "compute" {
 
 module "bastion" {
   source = "./bastion"
-  
+
   # public_cidrs     = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   # ami_id           = var.ami_id
   # public_sn_count  = var.public_sn_count
@@ -53,12 +53,13 @@ module "bastion" {
 
 
 module "networking" {
-  source              = "./networking"
-  max_subnets         = 5
-  vpc_cidr            = "10.0.0.0/16"
-  access_ip           = var.access_ip
-  security_groups     = module.networking.two_tier_public_sg
-  db_subnet_group     = var.db_subnet_group_name
+  source               = "./networking"
+  max_subnets          = 5
+  vpc_cidr             = "10.0.0.0/16"
+  access_ip            = var.access_ip
+  security_groups      = module.networking.two_tier_public_sg
+  db_subnet_group      = var.db_subnet_group
+  db_subnet_group_name = "two_tier_rds_sng"
   # count               = var.private_sn_count
   public_cidrs        = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs       = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
@@ -75,8 +76,9 @@ module "database" {
   db_instance_class      = "db.t2.micro"
   skip_db_snapshot       = true
   db_engine_version      = "5.7.22"
-  db_identifier          = "rds mysql"
-  db_subnet_group_name   = module.networking.db_subnet_group_name[0]
+#  identifier          = "rds mysql"
+  db_identifier          = var.db_identifier
+  db_subnet_group_name   = module.networking.db_subnet_group_name
   vpc_security_group_ids = [module.networking.db_security_group]
 }
 
