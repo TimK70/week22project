@@ -9,8 +9,8 @@ resource "aws_db_instance" "two_tier_db" {
   password          = var.dbpassword
   #db_subnet_group_name   = var.db_subnet_group_name
   vpc_security_group_ids = [aws_security_group.two_tier_public_sg.id]
- # db_identifier             = var.db_identifier
-  skip_final_snapshot    = var.skip_db_snapshot
+  # db_identifier             = var.db_identifier
+  skip_final_snapshot = var.skip_db_snapshot
   tags = {
     Name = "two_tier_db"
   }

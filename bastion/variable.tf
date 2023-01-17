@@ -1,7 +1,7 @@
 #---bastion/variable.tf
 
 variable "bastion_ami" {
-  default = "ami-0cf1dfc38e4c28f7d"
+  default = "ami-0c3cc3eb0dbb3a47d"
 }
 
 variable "bastion_instance_type" {
