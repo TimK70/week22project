@@ -15,6 +15,7 @@ module "compute" {
   dbpassword      = var.dbpassword
   db_endpoint     = module.database.db_endpoint
   user_data_path  = "${path.root}/userdata.tpl"
+
   # lb_target_group_arn = module.loadbalancing.lb_target_group_arn
   # tg_port             = 8000
   # private_key_path = "/home/ec2-user/.ssh/two_tierkey"
@@ -24,7 +25,7 @@ module "compute" {
 
 module "bastion" {
   source = "./bastion"
-
+  vpc_id = module.networking.vpc_id
   # public_cidrs     = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   # ami_id           = var.ami_id
   # public_sn_count  = var.public_sn_count
@@ -44,10 +45,7 @@ module "networking" {
   security_groups      = module.networking.two_tier_public_sg
   db_subnet_group      = var.db_subnet_group
   db_subnet_group_name = "two_tier_rds_sng"
-<<<<<<< HEAD
-=======
   # count               = var.private_sn_count
->>>>>>> 8cfc779 (updated project files)
   public_cidrs        = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs       = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
   public_sn_count     = var.public_sn_count
@@ -67,6 +65,7 @@ module "database" {
   db_identifier          = var.db_identifier
   db_subnet_group_name   = module.networking.db_subnet_group_name
   vpc_security_group_ids = [module.networking.db_security_group]
+  #  vpc_id                    = var.two_tier_vpc
 }
 
 # resource "aws_route_table" "two_tier_private_rt" {

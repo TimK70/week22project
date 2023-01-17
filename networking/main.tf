@@ -25,6 +25,7 @@ resource "aws_vpc" "two_tier_vpc" {
   }
 }
 
+
 resource "aws_subnet" "two_tier_public_subnet" {
   count                   = var.public_sn_count
   vpc_id                  = aws_vpc.two_tier_vpc.id

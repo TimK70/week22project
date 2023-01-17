@@ -20,4 +20,7 @@ variable "bastion_instance_profile_name" {
   default = "my-bastion-profile"
 }
 
+variable "vpc_id" {}
+
+
 # variable "aws_subnet_two_tier_public_subnet" {}

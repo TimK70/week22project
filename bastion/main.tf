@@ -17,8 +17,8 @@ resource "aws_instance" "bastion" {
 #   vpc_id = aws_vpc.two_tier_vpc.id
 # }
 
-resource "aws_vpc" "two_tier_vpc" {
-  vpc_id = "vpc-0813d96f9095c0532"
+resource "aws_subnet" "two_tier_vpc" {
+  vpc_id     = var.vpc_id
   cidr_block = "10.0.0.0/16"
 }
 

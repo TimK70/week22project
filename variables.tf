@@ -27,3 +27,6 @@ variable "two_tier_natgateway" {
   default = "two-tier-ngw"
 }
 variable "db_identifier" {}
+variable "vpc_id" {
+  default = "two_tier_vpc"
+}
