@@ -1,4 +1,5 @@
 #---database/main.tf---
+
 resource "aws_db_instance" "two_tier_db" {
   allocated_storage = 20
   engine            = "mysql"
@@ -7,8 +8,8 @@ resource "aws_db_instance" "two_tier_db" {
   name              = var.dbname
   username          = var.dbuser
   password          = var.dbpassword
-  #db_subnet_group_name   = var.db_subnet_group_name
-  vpc_security_group_ids = [aws_security_group.two_tier_public_sg.id]
+  db_subnet_group_name   = var.db_subnet_group_name
+  vpc_security_group_ids = [aws_security_group.two_tier_private_sg.id]
   # db_identifier             = var.db_identifier
   skip_final_snapshot = var.skip_db_snapshot
   tags = {
