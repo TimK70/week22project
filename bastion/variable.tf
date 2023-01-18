@@ -22,5 +22,6 @@ variable "bastion_instance_profile_name" {
 
 variable "vpc_id" {}
 
+variable "vpc_cidr" {}
 
-# variable "aws_subnet_two_tier_public_subnet" {}
+#variable "aws_subnet_two_tier_public_subnet" {}

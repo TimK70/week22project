@@ -20,5 +20,4 @@ variable "db_subnet_group" {
 variable "two_tier_natgateway" {}
 
 
-variable "db_subnet_group_name" {}
 
