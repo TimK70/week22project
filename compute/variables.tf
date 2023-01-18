@@ -21,3 +21,4 @@ variable "db_instance_type" {
 }
 variable "vol_size" {}
 variable "public_key_path" {}
+variable "two_tier_public_sg" {}

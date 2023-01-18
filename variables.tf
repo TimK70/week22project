@@ -33,3 +33,6 @@ variable "vpc_id" {
 variable "db_subnet_group_name" {
   default = "two_tier_rds_sng"
 }
+variable "two_tier_public_sg" {
+  default = "two_tier_public_sg"
+}

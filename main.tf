@@ -15,6 +15,7 @@ module "compute" {
   dbpassword      = var.dbpassword
   db_endpoint     = module.database.db_endpoint
   user_data_path  = "${path.root}/userdata.tpl"
+  two_tier_public_sg = "two_tier_public_sg"
 
   # lb_target_group_arn = module.loadbalancing.lb_target_group_arn
   # tg_port             = 8000

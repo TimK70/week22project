@@ -32,7 +32,7 @@ resource "aws_instance" "two_tier_node" {
   }
 
   key_name               = aws_key_pair.key_auth.id
-  vpc_security_group_ids = [var.public_sg]
+  vpc_security_group_ids = [var.two_tier_public_sg]
   subnet_id              = var.public_subnets[count.index]
   user_data = templatefile(var.user_data_path,
     {
