@@ -25,7 +25,6 @@ resource "aws_vpc" "two_tier_vpc" {
   }
 }
 
-
 resource "aws_subnet" "two_tier_public_subnet" {
   count                   = var.public_sn_count
   vpc_id                  = aws_vpc.two_tier_vpc.id
@@ -60,6 +59,10 @@ resource "aws_route_table_association" "two_tier_private_assoc" {
   count          = length(var.private_cidrs)
   subnet_id      = aws_subnet.two_tier_private_subnet.*.id[count.index]
   route_table_id = aws_default_route_table.two_tier_private_rt.id
+}
+
+resource "aws_route_table" "default_private_route" {
+  vpc_id = aws_vpc.two_tier_vpc.id  
 }
 
 resource "aws_internet_gateway" "two_tier_igw" {
@@ -97,19 +100,19 @@ resource "aws_default_route_table" "two_tier_private_rt" {
   default_route_table_id = aws_vpc.two_tier_vpc.default_route_table_id
 
   tags = {
-    Name = "two_tier_private_rt"
+    Name = "two_tier_private"
   }
 }
 
-resource "aws_route" "default_private_route" {
-  route_table_id         = aws_default_route_table.two_tier_private_rt.id
-  destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.two_tier_natgateway.id
+# resource "aws_route" "default_private_route" {
+#   route_table_id         = aws_route_table.default_private_rt.id
+#   destination_cidr_block = "0.0.0.0/0"
+#   nat_gateway_id         = aws_nat_gateway.two_tier_natgateway.id
 
-  # tags = {
-  #   Name = "two_tier_private_route"
-  # }
-}
+#   tags = {
+#     Name = "two_tier_private_route"
+#   }
+# }
 
 resource "aws_security_group" "two_tier_public_sg" {
   name   = "two_tier_bastion_sg"

@@ -2,24 +2,19 @@
 resource "aws_instance" "bastion" {
   ami           = var.bastion_ami
   instance_type = var.bastion_instance_type
-  #subnet_id                   = var.aws_subnet_two_tier_public_subnet_id
+  #subnet_id    = var.aws_subnet_two_tier_public_subnet_id
   associate_public_ip_address = true
-  #key_name                    = var.key_name
+  #key_name     = var.key_name
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
 }
 
-# resource "aws_eip" "bastion_eip" {
-#   vpc      = true
-#   instance = aws_instance.bastion.id
-# }
-
 # resource "aws_subnet" "two_tier_public_subnet" {
-#   vpc_id = aws_vpc.two_tier_vpc.id
+#   vpc_id    = var.vpc_id
 # }
 
-resource "aws_subnet" "two_tier_vpc" {
+resource "aws_subnet" "two_tier_public_subnet" {
   vpc_id     = var.vpc_id
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "10.0.0.0/24"
 }
 
 resource "aws_security_group" "bastion_sg" {

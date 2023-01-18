@@ -1,21 +1,28 @@
 #---database/main.tf---
 
+
 resource "aws_db_instance" "two_tier_db" {
-  allocated_storage      = 20
-  engine                 = "mysql"
-  engine_version         = var.db_engine_version
-  instance_class         = var.db_instance_class
-  name                   = var.dbname
-  username               = var.dbuser
-  password               = var.dbpassword
-  db_subnet_group_name   = "var.db_subnet_group_name"
+  allocated_storage = 20
+  engine            = "mysql"
+  engine_version    = var.db_engine_version
+  instance_class    = var.db_instance_class
+  name              = var.dbname
+  username          = var.dbuser
+  password          = var.dbpassword
+  # db_subnet_group_name   = aws_db_subnet_group.two_tier_rds_subnetgroup.id
   vpc_security_group_ids = [aws_security_group.two_tier_private_sg.id]
-  # db_identifier             = var.db_identifier
+  #db_identifier          = var.db_identifier
   skip_final_snapshot = var.skip_db_snapshot
   tags = {
     Name = "two_tier_db"
   }
 }
+
+# resource "aws_db_subnet_group" "two_tier_rds_subnetgroup" {
+#   name        = "${var.db_identifier}-subnet-group"
+#   description = "mysql subnet group"
+#   subnet_ids  = ["172.31.0.0/20", "172.31.16.0/20"]
+# }
 
 resource "aws_security_group" "two_tier_private_sg" {
   name        = "database_two_tier_sg"
@@ -35,8 +42,8 @@ resource "aws_security_group" "two_tier_private_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = 80
-    to_port   = 80
+    from_port = 3306
+    to_port   = 3306
     protocol  = "tcp"
   }
   egress {

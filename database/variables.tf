@@ -18,4 +18,6 @@ variable "access_ip" {
 variable "db_identifier" {
   default = "two-tier-db"
 }
+# variable "aws_subnet" {}
+
 

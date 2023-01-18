@@ -30,3 +30,6 @@ variable "db_identifier" {}
 variable "vpc_id" {
   default = "two_tier_vpc"
 }
+variable "db_subnet_group_name" {
+  default = "two_tier_rds_sng"
+}

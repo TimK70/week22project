@@ -21,19 +21,10 @@ module "compute" {
   # private_key_path = "/home/ec2-user/.ssh/two_tierkey"
 }
 
-
-
 module "bastion" {
-  source = "./bastion"
-  vpc_id = module.networking.vpc_id
-  # public_cidrs     = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
-  # ami_id           = var.ami_id
-  # public_sn_count  = var.public_sn_count
-  # private_sn_count = var.private_sn_count
-  # key_name         = var.key_name
-  # db_name          = var.dbname
-  # dbuser           = var.dbuser
-  # dbpassword       = var.dbpassword
+  source   = "./bastion"
+  vpc_id   = module.networking.vpc_id
+  vpc_cidr = "10.0.0.0/16"
 }
 
 
@@ -44,7 +35,7 @@ module "networking" {
   access_ip            = var.access_ip
   security_groups      = module.networking.two_tier_public_sg
   db_subnet_group      = var.db_subnet_group
-  db_subnet_group_name = "two_tier_rds_sng"
+  #db_subnet_group_name = "two_tier_rds_sng"
   # count               = var.private_sn_count
   public_cidrs        = ["10.0.2.0/24", "10.0.4.0/24", "10.0.6.0/24"]
   private_cidrs       = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24", "10.0.7.0/24"]
@@ -60,12 +51,13 @@ module "database" {
   dbpassword        = var.dbpassword
   db_instance_class = "db.t2.micro"
   skip_db_snapshot  = true
+  db_subnet_group_name = "mysql"
   db_engine_version = "5.7"
   #  identifier          = "rds mysql"
   db_identifier          = var.db_identifier
-  db_subnet_group_name   = module.networking.db_subnet_group_name
   vpc_security_group_ids = [module.networking.db_security_group]
-  #  vpc_id                    = var.two_tier_vpc
+  #aws_subnet             = module.networking.two_tier_rds_subnetgroup
+  #vpc_id                    = var.two_tier_vpc
 }
 
 # resource "aws_route_table" "two_tier_private_rt" {
