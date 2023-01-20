@@ -46,7 +46,7 @@ resource "aws_route_table_association" "two_tier_public_assoc" {
 resource "aws_subnet" "two_tier_private_subnet" {
   count                   = var.private_sn_count
   vpc_id                  = aws_vpc.two_tier_vpc.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = var.private_cidrs[count.index]
   map_public_ip_on_launch = false
   availability_zone       = random_shuffle.az_list.result[count.index]
 

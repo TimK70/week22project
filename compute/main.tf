@@ -33,7 +33,7 @@ resource "aws_instance" "two_tier_node" {
 
   key_name               = aws_key_pair.key_auth.id
   vpc_security_group_ids = [var.two_tier_public_sg]
-  subnet_id              = var.public_subnets[count.index]
+  subnet_id              = "var.public_subnets[count.index]"
   user_data = templatefile(var.user_data_path,
     {
       nodename    = "two-tier-${random_id.two_tier_node_id[count.index].dec}"
@@ -47,29 +47,4 @@ resource "aws_instance" "two_tier_node" {
     volume_size = var.vol_size # 10
   }
 }
-
-# provisioner "remote-exec" {
-#     connection {
-#       type        = "ssh"
-#       user        = "ubuntu"
-#       host        = self.public_ip
-#       private_key = file(var.private_key_path)
-#     }
-#     script = "${path.root}/delay.sh"
-#   }
-#   provisioner "local-exec" {
-#     command = templatefile("${path.cwd}/scp_script.tpl",
-#       {
-#         nodeip           = self.public_ip
-#         k3s_path         = "${path.cwd}/../"
-#         nodename         = self.tags.Name
-#         private_key_path = var.private_key_path
-#       }
-#     )
-#   }
-#   provisioner "local-exec" {
-#     when    = destroy
-#     command = "rm -f ${path.cwd}/../k3s-mtc_node-*"
-#   }
-# }
 

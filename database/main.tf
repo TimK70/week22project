@@ -4,6 +4,7 @@
 resource "aws_db_instance" "two_tier_db" {
   allocated_storage = 20
   engine            = "mysql"
+  #vpc_id            = var.two_tier_vpc
   engine_version    = var.db_engine_version
   instance_class    = var.db_instance_class
   name              = var.dbname
