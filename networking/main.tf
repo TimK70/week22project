@@ -62,7 +62,7 @@ resource "aws_route_table_association" "two_tier_private_assoc" {
 }
 
 resource "aws_route_table" "default_private_route" {
-  vpc_id = aws_vpc.two_tier_vpc.id  
+  vpc_id = aws_vpc.two_tier_vpc.id
 }
 
 resource "aws_internet_gateway" "two_tier_igw" {
